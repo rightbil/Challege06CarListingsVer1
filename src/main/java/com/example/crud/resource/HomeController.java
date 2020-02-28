@@ -26,20 +26,20 @@ public class HomeController {
 
     //TODO: 1.1 Add Category
     @RequestMapping(value = "/addCategory")
-    public String addDept(Model model) {
+    public String addCategory(Model model) {
         model.addAttribute("category", new Category());
         return "categoryForm";
     }
 
     @RequestMapping(value = "/addCategory", method = RequestMethod.POST)
-    public String addDept(@ModelAttribute Category dept, Model model) {
+    public String addCategory(@ModelAttribute Category dept, Model model) {
         categoryRepository.save(dept);
         return "redirect:/";
     }
 
     //TODO: 1.2 Add Car
     @RequestMapping(value = "/addCar")
-    public String addEmployee(Model model) {
+    public String addCar(Model model) {
         Object o = categoryRepository.findAll();
         model.addAttribute("catgs", categoryRepository.findAll());
         model.addAttribute("car", new Car());
@@ -47,35 +47,35 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/addCar", method = RequestMethod.POST)
-    public String addEmployee(@ModelAttribute Car car) {
+    public String addCar(@ModelAttribute Car car) {
         carRepository.save(car);
         return "redirect:/";
     }
     //TODO: 2.1 Delete Category
 
     @RequestMapping("/deleteCategory/{id}")
-    public String deleteDepartment(@PathVariable("id") long id) {
+    public String deleteCategory(@PathVariable("id") long id) {
         categoryRepository.deleteById(id);
         return "redirect:/";
     }
 
     //TODO: 2.2 Delete Car
     @RequestMapping("/deleteCar/{id}")
-    public String deleteEmployee(@PathVariable("id") long id) {
+    public String deleteCar(@PathVariable("id") long id) {
         carRepository.deleteById(id);
         return "redirect:/";
     }
 
     //TODO: 3.1 Update Category
     @RequestMapping("/updateCategory/{id}")
-    public String upateDepartment(@PathVariable("id") long id, Model model) {
+    public String upateCategory(@PathVariable("id") long id, Model model) {
         model.addAttribute("category", categoryRepository.findById(id).get());
         return "categoryForm";
     }
 
     //TODO: 3.2 Update Car
     @RequestMapping("/updateCar/{id}")
-    public String upateEmployee(@PathVariable("id") long id, Model model) {
+    public String upateCar(@PathVariable("id") long id, Model model) {
         model.addAttribute("car", carRepository.findById(id).get());
         return "carForm";
     }
